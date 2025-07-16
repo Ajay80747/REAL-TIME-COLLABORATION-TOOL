@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Real-Time Collab</title>
+  <link rel="stylesheet" href="App.css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="A real-time collaborative editor built with React and WebSockets." />
+    <meta name="keywords" content="collaboration, real-time, editor, React, WebSockets" />
+    <meta name="author" content="Your Name" />
+    <meta property="og:title" content="Real-Time Collab" />
+    <meta property="og:description" content="A real-time collaborative editor built with React and WebSockets." />
+    <meta property="og:image" content="favicon.png" />
+</head>
+<meta property="og:url" content="https://yourwebsite.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Real-Time Collab" />
+    <meta name="twitter:description" content="A real-time collaborative editor built with React and WebSockets." />
+    <meta name="twitter:image" content="favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css
+/4.1.1/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons    
+
+/4.5.10-0/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/typicons        
+
+/2.1.2/typicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons
+
+/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/
+
+8.5.0/octicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/  
+2.0.10/css/weather-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome
+
+/1.3.0/line-awesome.min.css">
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+    <div class="error-message" style="display: none;">
+            <h1>Error</h1>
+            <p>Something went wrong. Please try again later.</p>
+
+            <button onclick="location.reload()">Reload</button>
+        </div>  
+    <div class="success-message" style="display: none;">
+            <h1>Success</h1>
+            <p>Your action was successful!</p>
+
+            <
+button onclick="location.reload()">Reload</button>
+        </div>
+    <div class="warning-message" style="display: none;">
+            <h1>Warning</h1>
+            <p>There might be an issue. Please check your input.</p>
+
+            <button onclick="location.reload()">Reload</button>
+        </div>
+    <div class="info-message" style="display: none;">
+            <h1>Information</h1>
+            <p>This is an informational message.</p>
+
+            <button onclick="location.reload()">Reload</button>
+        </div>
+    <div class="loading-message" style="display: none;">
+            <h1>Loading</h1>
+            <p>Please wait while we load the content.</p>
+
+            <
+button onclick="location.reload()">Reload</button>
+        </div>  
+    <div class="main-content">
+        <h1>Welcome to Real-Time Collab</h1>    
+        <p>Collaborate in real-time with others on your projects.</p>   
+
+        <button class="start-collab-btn">Start Collaborating</button>
+    </div>
+
+    <div class="footer">
+            <p>&copy; 2023 Real-Time Collab. All rights reserved.</p>
+            <p>Follow us on 
+                <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener">Twitter</a>, 
+                <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener">Facebook</a>, 
+                <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener">Instagram</a>
+            </p>
+        </div>
+    <div class="sidebar">
+                <h2>Navigation</h2>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <h2>Resources</h2>
+                <ul>
+                    <li><a href="#docs">Documentation</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#blog">Blog</a></li>   
+                    <li><a href="#community">Community</a></li>
+                </ul>
+  <div id="root"></div>
+  <style>
+    /* Add your custom styles here */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .main-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
+    .footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+    }
+    .footer a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .footer a:hover {
+        text-decoration: underline;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+    }
+    .sidebar h2 {
+        margin-top: 0;
+    }
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+    .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .sidebar ul li a:hover {
+        text-decoration: underline;
+    }
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    .spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .loader h1 {
+        margin-top: 20px;
+    }
+    .error-message, .success-message, .warning-message, .info-message, .loading-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        text-align: center;
+    }
+    .error-message h1, .success-message h1, .warning-message h1, .info-message h1, .loading-message h1 {
+        margin: 0 0 10px;
+    }
+    .error-message p, .success-message p, .warning-message p, .info-message p, .loading-message p {
+        margin: 0 0 20px;
+    }
+    .error-message button, .success-message button, .warning-message button, .info-message button, .loading-message button {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .error-message button:hover, .success-message button:hover, .warning-message button:hover, .info-message button:hover, .loading-message button:hover {
+        background-color: #2980b9;
+    }
+    .start-collab-btn {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .start-collab-btn:hover {
+        background-color: #2980b9;
+    }
+    .start-collab-btn:focus {
+        outline: none;
+    }
+    .start-collab-btn:active {
+        background-color: #2980b9;
+    }
+    .start-collab-btn:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+    }
+    .start-collab-btn:disabled:hover {
+        background-color: #bdc3c7;
+    }
+
+  </style>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>
